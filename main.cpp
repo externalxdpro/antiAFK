@@ -11,22 +11,23 @@ int main()
 {
     while (true)
     {
-        int minVal = 0x41;
-        int maxVal = 0x5A;
-        int chars = 100;
+        LPSTR windowTitle_lpstr;
+        GetWindowText(GetForegroundWindow(), windowTitle_str, MAXINT32);
+        string windowTitle_str = windowTitle_lpstr;
 
-        for (int i = 0; i < chars; i++)
+        int notepadLength = 7;
+        int geforceLength = 11;
+
+        if (windowTitle_str.substr(size(windowTitle_str) - notepadLength) == "Notepad" || windowTitle_str.substr(size(windowTitle_str) - geforceLength) == "GeForce Now")
         {
+            int minVal = 0x41;
+            int maxVal = 0x5A;
+
             srand(time(nullptr));
             int randKey = rand() % (maxVal - minVal + 1) + minVal;
             keybd_event(randKey, 0, 0, 0);
-            sleep_for(seconds(1));
-        }
-
-        for (int i = 0; i < chars; i++)
-        {
+            sleep_for(milliseconds(10));
             keybd_event(VK_BACK, 0, 0, 0);
-            sleep_for(milliseconds(100));
         }
     }
 
