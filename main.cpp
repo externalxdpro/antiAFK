@@ -137,6 +137,7 @@ int main()
     
     default:
         cout << "Enter one of the options." << endl;
+        sleep_for(seconds(1));
         main();
     }
 
