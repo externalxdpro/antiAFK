@@ -1,6 +1,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <vector>
 #include <windows.h>
 
 using namespace std;
@@ -79,6 +80,32 @@ void RandomMovementArrows()
     }
 }
 
+void TestForegroundWindow()
+{
+    while (true)
+    {
+        char temp[256];
+        GetWindowText(GetForegroundWindow(), temp, MAXINT32);
+        string title = temp;
+
+        int notepadLength = 7;
+
+        try
+        {
+            if (title.substr(size(title) - notepadLength) == "Notepad")
+            {
+                cout << title.substr(size(title) - notepadLength) << endl;
+                sleep_for(seconds(1));
+            }
+        }
+        catch(const std::out_of_range &exception)
+        {
+            cout << "Out of range" << endl;
+            sleep_for(seconds(1));
+        }
+    }
+}
+
 int main()
 {
     int choice;
@@ -102,6 +129,10 @@ int main()
     
     case 3:
         RandomMovementArrows();
+        break;
+
+    case 4:
+        TestForegroundWindow();
         break;
     
     default:
