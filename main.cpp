@@ -8,7 +8,7 @@ using namespace std;
 using namespace this_thread;
 using namespace chrono;
 
-void RandomKeys()
+void randomKeys()
 {
     int minVal = 0x41;
     int maxVal = 0x5A;
@@ -34,7 +34,7 @@ void RandomKeys()
     }
 }
 
-void RandomMovementWASD()
+void randomMovementWASD()
 {
     int keys[] = {0x57, 0x41, 0x53, 0x44};
     int maxVal = size(keys);
@@ -57,7 +57,7 @@ void RandomMovementWASD()
     }
 }
 
-void RandomMovementArrows()
+void randomMovementArrows()
 {
     int keys[] = {VK_UP, VK_LEFT, VK_DOWN, VK_RIGHT};
     int maxVal = size(keys);
@@ -80,7 +80,7 @@ void RandomMovementArrows()
     }
 }
 
-void TestForegroundWindow()
+void testForegroundWindow()
 {
     while (true)
     {
@@ -120,19 +120,19 @@ int main()
     switch (choice)
     {
     case 1:
-        RandomKeys();
+        randomKeys();
         break;
 
     case 2:
-        RandomMovementWASD();
+        randomMovementWASD();
         break;
     
     case 3:
-        RandomMovementArrows();
+        randomMovementArrows();
         break;
 
     case 4:
-        TestForegroundWindow();
+        testForegroundWindow();
         break;
     
     default:
