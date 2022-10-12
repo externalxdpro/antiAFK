@@ -8,6 +8,23 @@ using namespace std;
 using namespace this_thread;
 using namespace chrono;
 
+vector<string> split(string s, char delimiter = ' ')
+{
+    int current;
+    int next = -1;
+
+    vector<string> result;
+
+    do
+    {
+        current = next + 1;
+        next = s.find_first_of(delimiter, current);
+        result.push_back(s.substr(current, next - current));
+    } while (next != string::npos);
+
+    return result;
+}
+
 void randomKeys()
 {
     int minVal = 0x41;
@@ -80,6 +97,41 @@ void randomMovementArrows()
     }
 }
 
+void editProgramsList(vector<string> list)
+{
+    cout << "Current list: ";
+    for (int i = 0; i < size(list); i++)
+    {
+        if (i == size(list) - 1)
+        {
+            cout << list[i] << endl;
+        }
+        else
+        {
+            cout << list[i] << ",";
+        }
+    }
+    cout << "Enter new list: " << endl;
+
+    string input;
+    getline(cin, input);
+    list = split(input, ',');
+
+    cout << "New List: ";
+    for (int i = 0; i < size(list); i++)
+    {
+        if (i == size(list) - 1)
+        {
+            cout << list[i] << endl;
+        }
+        else
+        {
+            cout << list[i] << ",";
+        }
+    }
+    cout << endl;
+}
+
 void testForegroundWindow()
 {
     while (true)
@@ -108,14 +160,28 @@ void testForegroundWindow()
 
 int main()
 {
-    int choice;
+    vector<string> list = {"Notepad"};
     
     // Choice selection
+    string input;
+    int choice;
+
     cout << "Enter a number:" << endl
          << "1: Random Keys (typically for main menus)" << endl
          << "2: Random WASD Movement (typically for in-game)" << endl
          << "3: Random Arrow Key Movement (typically for in-game)" << endl;
-    cin >> choice;
+    getline(cin, input);
+    
+    try
+    {
+        choice = stoi(input);
+    }
+    catch(const std::invalid_argument exception)
+    {
+        cout << "Enter one of the options." << endl;
+        sleep_for(seconds(1));
+        main();
+    }
 
     switch (choice)
     {
@@ -132,6 +198,10 @@ int main()
         break;
 
     case 4:
+        editProgramsList(list);
+        break;
+    
+    case 5:
         testForegroundWindow();
         break;
     
