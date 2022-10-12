@@ -85,7 +85,7 @@ void TestForegroundWindow()
     while (true)
     {
         char temp[256];
-        GetWindowText(GetForegroundWindow(), temp, MAXINT32);
+        GetWindowText(GetForegroundWindow(), temp, size(temp));
         string title = temp;
 
         int notepadLength = 7;
