@@ -125,9 +125,8 @@ void editProgramsList()
     iFileHandler.close();
     vector<string> list = split(line, ',');
 
-    cout << "Current list: ";
-    printVector(list);
-    cout << "Enter new list: " << endl;
+    cout << "Current list: " << line << endl;
+    cout << "Enter new list: ";
 
     string input;
     getline(cin, input);
