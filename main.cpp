@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <thread>
 #include <chrono>
 #include <vector>
@@ -112,8 +113,18 @@ void randomMovementArrows()
     }
 }
 
-void editProgramsList(vector<string> list)
+void editProgramsList()
 {
+    ifstream iFileHandler;
+    ofstream oFileHandler;
+    string file = "list";
+    string line;
+    
+    iFileHandler.open(file);
+    getline(iFileHandler, line);
+    iFileHandler.close();
+    vector<string> list = split(line, ',');
+
     cout << "Current list: ";
     printVector(list);
     cout << "Enter new list: " << endl;
@@ -122,9 +133,14 @@ void editProgramsList(vector<string> list)
     getline(cin, input);
     list = split(input, ',');
 
+    oFileHandler.open(file);
+    oFileHandler << input;
+    oFileHandler.close();
+
     cout << "New List: ";
     printVector(list);
     cout << endl;
+    sleep_for(seconds(1));
 }
 
 void testForegroundWindow()
@@ -155,8 +171,6 @@ void testForegroundWindow()
 
 int main()
 {
-    vector<string> list = {"Notepad"};
-    
     // Choice selection
     string input;
     int choice;
@@ -164,7 +178,8 @@ int main()
     cout << "Enter a number:" << endl
          << "1: Random Keys (typically for main menus)" << endl
          << "2: Random WASD Movement (typically for in-game)" << endl
-         << "3: Random Arrow Key Movement (typically for in-game)" << endl;
+         << "3: Random Arrow Key Movement (typically for in-game)" << endl
+         << "4: Edit program list" << endl;
     getline(cin, input);
     
     try
@@ -193,7 +208,8 @@ int main()
         break;
 
     case 4:
-        editProgramsList(list);
+        editProgramsList();
+        main();
         break;
     
     case 5:
