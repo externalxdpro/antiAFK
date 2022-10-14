@@ -98,14 +98,13 @@ void randomMovementArrows()
     }
 }
 
-void editProgramsList()
+void editProgramsList(string fileName)
 {
     ifstream iFileHandler;
     ofstream oFileHandler;
-    string file = "list";
     string line;
     
-    iFileHandler.open(file);
+    iFileHandler.open(fileName);
     getline(iFileHandler, line);
     iFileHandler.close();
 
@@ -115,7 +114,7 @@ void editProgramsList()
     string input;
     getline(cin, input);
 
-    oFileHandler.open(file);
+    oFileHandler.open(fileName);
     oFileHandler << input;
     oFileHandler.close();
 
@@ -123,20 +122,26 @@ void editProgramsList()
     sleep_for(seconds(1));
 }
 
-void testForegroundWindow()
+void testForegroundWindow(string fileName)
 {
     while (true)
     {
         char temp[256];
         GetWindowText(GetForegroundWindow(), temp, size(temp));
         string title = temp;
+        
+        string line;
+        ifstream iFileHandler(fileName);
+        getline(iFileHandler, line);
+        vector<string> list = split(line, ',');
 
-        int notepadLength = 7;
-
-        if (size(title) >= notepadLength && title.substr(size(title) - notepadLength) == "Notepad")
+        for (string program : list)
         {
-            cout << title.substr(size(title) - notepadLength) << endl;
-            sleep_for(seconds(1));
+            if (size(title) >= size(program) && title.substr(size(title) - size(program)) == program)
+            {
+                cout << title.substr(size(title) - size(program)) << endl;
+                sleep_for(seconds(1));
+            }
         }
     }
 }
@@ -165,6 +170,8 @@ int main()
         main();
     }
 
+    string fileName = "list";
+
     switch (choice)
     {
     case 1:
@@ -180,12 +187,12 @@ int main()
         break;
 
     case 4:
-        editProgramsList();
+        editProgramsList(fileName);
         main();
         break;
     
     case 5:
-        testForegroundWindow();
+        testForegroundWindow(fileName);
         break;
     
     default:
