@@ -148,17 +148,9 @@ void testForegroundWindow()
 
         int notepadLength = 7;
 
-        try
+        if (size(title) >= notepadLength && title.substr(size(title) - notepadLength) == "Notepad")
         {
-            if (title.substr(size(title) - notepadLength) == "Notepad")
-            {
-                cout << title.substr(size(title) - notepadLength) << endl;
-                sleep_for(seconds(1));
-            }
-        }
-        catch(const std::out_of_range &exception)
-        {
-            cout << "Out of range" << endl;
+            cout << title.substr(size(title) - notepadLength) << endl;
             sleep_for(seconds(1));
         }
     }
