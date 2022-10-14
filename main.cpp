@@ -26,21 +26,6 @@ vector<string> split(string s, char delimiter = ' ')
     return result;
 }
 
-void printVector(vector<string> list)
-{
-    for (int i = 0; i < size(list); i++)
-    {
-        if (i == size(list) - 1)
-        {
-            cout << list[i] << endl;
-        }
-        else
-        {
-            cout << list[i] << ",";
-        }
-    }
-}
-
 void randomKeys()
 {
     int minVal = 0x41;
