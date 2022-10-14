@@ -123,22 +123,18 @@ void editProgramsList()
     iFileHandler.open(file);
     getline(iFileHandler, line);
     iFileHandler.close();
-    vector<string> list = split(line, ',');
 
     cout << "Current list: " << line << endl;
     cout << "Enter new list: ";
 
     string input;
     getline(cin, input);
-    list = split(input, ',');
 
     oFileHandler.open(file);
     oFileHandler << input;
     oFileHandler.close();
 
-    cout << "New List: ";
-    printVector(list);
-    cout << endl;
+    cout << "Program list updated." << endl;
     sleep_for(seconds(1));
 }
 
