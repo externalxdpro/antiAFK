@@ -175,7 +175,8 @@ int main()
          << "1: Random Keys (typically for main menus)" << endl
          << "2: Random WASD Movement (typically for in-game)" << endl
          << "3: Random Arrow Key Movement (typically for in-game)" << endl
-         << "4: Edit program list" << endl;
+         << "4: Edit program list" << endl
+         << "5: Exit" << endl;
     getline(cin, input);
     
     try
@@ -210,11 +211,12 @@ int main()
         main();
         break;
     
+    case 5:
+        return 0;
+    
     default:
         cout << "Enter one of the options." << endl;
         this_thread::sleep_for(seconds(1));
         main();
     }
-
-    return 0;
 }
